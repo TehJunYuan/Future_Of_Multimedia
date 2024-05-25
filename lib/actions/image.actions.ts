@@ -96,47 +96,45 @@ export async function getImages({
   limit = 9,
   page = 1,
   searchQuery = '',
-  userId = null,
+  userId = '',
 }: {
   limit?: number;
   page: number;
   searchQuery?: string;
-  userId?: string | null;
+  userId?: string;
 }) {
   try {
     await connectToDatabase();
 
-    let query = {};
+    cloudinary.config({
+      cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+      secure: true,
+    });
+
+    let expression = 'folder=imaginify';
+
+    if (searchQuery) {
+      expression += ` AND ${searchQuery}`;
+    }
+
+    let query: any = {};
 
     if (userId) {
-      query = { author: userId };
-    } else {
-      cloudinary.config({
-        cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
-        api_key: process.env.CLOUDINARY_API_KEY,
-        api_secret: process.env.CLOUDINARY_API_SECRET,
-        secure: true,
-      });
+      query.author = userId;
+    }
 
-      let expression = 'folder=imaginify';
+    const { resources } = await cloudinary.search
+      .expression(expression)
+      .execute();
 
-      if (searchQuery) {
-        expression += ` AND ${searchQuery}`;
-      }
+    const resourceIds = resources.map((resource: any) => resource.public_id);
 
-      const { resources } = await cloudinary.search
-        .expression(expression)
-        .execute();
-
-      const resourceIds = resources.map((resource: any) => resource.public_id);
-
-      if (searchQuery) {
-        query = {
-          publicId: {
-            $in: resourceIds,
-          },
-        };
-      }
+    if (searchQuery) {
+      query.publicId = {
+        $in: resourceIds,
+      };
     }
 
     const skipAmount = (Number(page) - 1) * limit;
@@ -147,10 +145,12 @@ export async function getImages({
       .limit(limit);
 
     const totalImages = await Image.find(query).countDocuments();
+    const savedImages = await Image.find().countDocuments();
 
     return {
       data: JSON.parse(JSON.stringify(images)),
       totalPages: Math.ceil(totalImages / limit),
+      savedImages,
     };
   } catch (error) {
     handleError(error);
