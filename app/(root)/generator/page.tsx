@@ -6,33 +6,40 @@ import { MessageSquare, ArrowRight, Music, Image, Video, Code, Mic } from "lucid
 import { useRouter } from "next/navigation";
 
 const tools = [
-  {
-    label: "Conversation",
-    icon: MessageSquare,
-    color: "text-violet-500",
-    bgColor: "bg-violet-500/10",
-    href: "/conversation"
-  },
+  // {
+  //   label: "Conversation",
+  //   icon: MessageSquare,
+  //   color: "text-violet-500",
+  //   bgColor: "bg-violet-500/10",
+  //   href: "/conversation"
+  // },
   {
     label: "Image Generation",
     icon: Image,
     color: "text-pink-700",
     bgColor: "bg-pink-700/10",
-    href: "/image"
+    href: "/generator/image"
   },
   {
     label: "Video Generation",
     icon: Video,
     color: "text-orange-700",
     bgColor: "bg-orange-700/10",
-    href: "/video"
+    href: "/generator/video"
   },
   {
-    label: "Speech Generation",
+    label: "Speech to Text",
     icon: Mic,
     color: "text-green-700",
     bgColor: "bg-green-700/10",
-    href: "/speech"
+    href: "/generator/speech-to-text"
+  },
+  {
+    label: "Text to Speech",
+    icon: Mic,
+    color: "text-green-700",
+    bgColor: "bg-green-700/10",
+    href: "/generator/text-to-speech"
   },
 ]
 
