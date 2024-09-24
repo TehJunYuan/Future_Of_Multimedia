@@ -7,6 +7,9 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         port: ''
       }
+    ],
+    domains: [
+      "oaidalleapiprodscus.blob.core.windows.net",
     ]
   }
 };
