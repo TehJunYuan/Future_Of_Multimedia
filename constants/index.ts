@@ -32,7 +32,7 @@ export const navLinks = [
   {
     label: "Generator",
     route: "/generator",
-    icon: "/assets/icons/camera.svg",
+    icon: "/assets/icons/lightbulb.svg",
   },
   {
     label: "Profile",
