@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface HeadingProps {
     title: string;
-    desciption: string;
+    description: string;
     icon: LucideIcon;
     iconColor?: string;
     bgColor: string;
@@ -11,7 +11,7 @@ interface HeadingProps {
 
 export const Heading = ({
     title,
-    desciption,
+    description,
     icon: Icon,
     iconColor,
     bgColor
@@ -24,7 +24,7 @@ export const Heading = ({
                 </div>
                 <div>
                     <h2 className="text-3xl font-bold"> {title}</h2>
-                    <p className="text-sm text-muted-foreground">{desciption}</p>
+                    <p className="text-sm text-muted-foreground">{description}</p>
                 </div>
             </div>
         </>
