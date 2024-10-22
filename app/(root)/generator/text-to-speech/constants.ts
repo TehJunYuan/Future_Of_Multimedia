@@ -4,33 +4,34 @@ export const formSchema = z.object({
     prompt: z.string().min(1, {
         message: "Prompt is required",
     }),
-    voiceOptions: z.string().min(1),
-    input: z.string().min(1),
+    selectedVoice: z.string().min(1, {
+        message: "Voice selection is required",
+    }),
 });
 
 export const voiceOptions = [
     {
         value: "alloy",
-        label: "alloy"
+        label: "Alloy"
     },
     {
         value: "echo",
-        label: "echo"
+        label: "Echo"
     },
     {
         value: "fable",
-        label: "fable"
+        label: "Fable"
     },
     {
         value: "onyx",
-        label: "onyx"
+        label: "Onyx"
     },
     {
         value: "nova",
-        label: "nova"
+        label: "Nova"
     },
     {
         value: "shimmer",
-        label: "shimmer"
+        label: "Shimmer"
     },
-  ];
+];
