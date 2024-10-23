@@ -32,16 +32,16 @@ const TextSpeechPage = () => {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            setAudioUrl(null);
-            setIsLoading(true);
+            setAudioUrl(null); // Reset audio URL before new request
+            setIsLoading(true); // Set loading state to true
             const response = await axios.post('/api/text-to-speech', values, {
                 responseType: 'arraybuffer' // Ensure the response is an ArrayBuffer
             });
- 
+
             // Create a Blob from the response data
             const audioBlob = new Blob([response.data], { type: 'audio/mpeg' });
             const audioUrl = URL.createObjectURL(audioBlob);
- 
+
             // Set the audio URL to state
             setAudioUrl(audioUrl);
             form.reset();
@@ -53,7 +53,7 @@ const TextSpeechPage = () => {
                 toast.error("Something went wrong.");
             }
         } finally {
-            setIsLoading(false);
+            setIsLoading(false); // Reset loading state
             router.refresh();
         }
     }
@@ -62,7 +62,7 @@ const TextSpeechPage = () => {
         <div>
             <Heading
                 title="Text to Speech"
-                description="Convert Your Prompt to Speech"
+                description="Convert Your Text to Speech"
                 icon={Mic}
                 iconColor="text-violet-500"
                 bgColor="bg-violet-500/10"
@@ -145,6 +145,17 @@ const TextSpeechPage = () => {
                     <div className="space-y-4 mt-4">
                         <div className="text-lg font-semibold text-gray-700">Your Result will be shown here</div>
                         <audio controls src={audioUrl} className="mt-4 w-full" />
+                        <Button
+                            className="mt-4"
+                            onClick={() => {
+                                const a = document.createElement('a');
+                                a.href = audioUrl;
+                                a.download = 'generated-audio.mp3';
+                                a.click();
+                            }}
+                        >
+                            Download
+                        </Button>
                     </div>
                 )}
             </div>
