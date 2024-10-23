@@ -6,13 +6,11 @@ const openai = new OpenAI({
   apiKey: process.env.OPEN_AI_KEY,
 });
 
-console.log("OpenAI Key:", process.env.OPEN_AI_KEY);
-
 export async function POST(req: Request) {
   try {
     const { userId } = auth();
-    const body = await req.json();
-    const { prompt, selectedVoice} = body;
+    const formData = await req.formData();
+    const audioFile = formData.get('audio') as File;
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
@@ -24,25 +22,22 @@ export async function POST(req: Request) {
       });
     }
 
-    if (!prompt) {
-      return new NextResponse("Input of Text are required", { status: 400 });
-    }
-    if (!selectedVoice) {
-      return new NextResponse("Voice choice are required", { status: 400 });
+    if (!audioFile) {
+      return new NextResponse("Audio file is required", { status: 400 });
     }
 
-    const response = await openai.audio.speech.create({
-      model: "tts-1",
-      voice: selectedVoice,
-      input: prompt,
+    // Correct method for speech-to-text
+    const response = await openai.audio.transcriptions.create({
+      model: "whisper-1", // Use the appropriate model for speech-to-text
+      file: audioFile,
     });
 
-    console.log("OpenAI Response:", response);
+    const transcription = response.text; // Access the correct property for transcription
 
-    return NextResponse.json(response);
+    return NextResponse.json({ transcription });
     
   } catch (error) {
-    console.log("[TTS_ERROR]", error);
+    console.log("[STT_ERROR]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
