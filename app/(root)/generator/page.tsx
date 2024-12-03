@@ -40,14 +40,14 @@ const tools = [
     icon: Mic,
     color: "text-green-700",
     bgColor: "bg-green-700/10",
-    href: "/generator/speech-to-text"
+    href: "/generator/speechtotext"
   },
   {
     label: "Text to Speech",
     icon: Text,
     color: "text-green-700",
     bgColor: "bg-green-700/10",
-    href: "/generator/text-to-speech"
+    href: "/generator/texttospeech"
   },
 ]
 
