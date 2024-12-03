@@ -1,3 +1,4 @@
+import ChatBot from '@/components/ChatBot';
 import Header from '@/components/shared/Header'
 import TransformationForm from '@/components/shared/TransformationForm';
 import { transformationTypes } from '@/constants'
@@ -28,6 +29,7 @@ const AddTransformationTypePage = async ({ params: { type } }: SearchParamProps)
           creditBalance={user.creditBalance}
         />
       </section>
+      <ChatBot />
     </>
   )
 }

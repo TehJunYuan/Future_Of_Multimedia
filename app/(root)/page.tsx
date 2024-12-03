@@ -8,6 +8,7 @@ import Link from "next/link"
 import { auth } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { getUserById } from "@/lib/actions/user.actions";
+import ChatBot from "@/components/ChatBot"
 
 const Home = async ({ searchParams }: SearchParamProps) => {
   const page = Number(searchParams?.page) || 1;
@@ -49,6 +50,7 @@ const Home = async ({ searchParams }: SearchParamProps) => {
             page={page}
           />
         </section>
+        <ChatBot />
       </SignedIn>
       <SignedOut>
         <section className="home">

@@ -1,17 +1,18 @@
 "use client";
 
+import ChatBot from "@/components/ChatBot";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { MessageSquare, ArrowRight, Music, Image, Video, Code, Mic } from "lucide-react";
+import { MessageSquare, ArrowRight, Music, Image, Video, Mic, Text } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const tools = [
   // {
-  //   label: "Conversation",
+  //   label: "AI Chatbot",
   //   icon: MessageSquare,
   //   color: "text-violet-500",
   //   bgColor: "bg-violet-500/10",
-  //   href: "/conversation"
+  //   href: "/generator/conversation"
   // },
   {
     label: "Image Generation",
@@ -28,6 +29,13 @@ const tools = [
     href: "/generator/video"
   },
   {
+    label: "Sound Effects Generation",
+    icon: Music,
+    color: "text-orange-700",
+    bgColor: "bg-orange-700/10",
+    href: "/generator/music"
+  },
+  {
     label: "Speech to Text",
     icon: Mic,
     color: "text-green-700",
@@ -36,7 +44,7 @@ const tools = [
   },
   {
     label: "Text to Speech",
-    icon: Mic,
+    icon: Text,
     color: "text-green-700",
     bgColor: "bg-green-700/10",
     href: "/generator/text-to-speech"
@@ -70,6 +78,7 @@ const DashboardPage = () =>{
             <ArrowRight className="w-5 h-5"/>
           </Card>
         ))}
+        <ChatBot /> 
       </div>
     </div>
   );

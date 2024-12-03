@@ -6,6 +6,7 @@ import { Collection } from "@/components/shared/Collection";
 import Header from "@/components/shared/Header";
 import { getImages } from "@/lib/actions/image.actions";
 import { getUserById } from "@/lib/actions/user.actions";
+import ChatBot from "@/components/ChatBot";
 
 const Profile = async ({ searchParams }: SearchParamProps) => {
   const page = Number(searchParams?.page) || 1;
@@ -44,6 +45,7 @@ const Profile = async ({ searchParams }: SearchParamProps) => {
           page={page}
         />
       </section>
+      <ChatBot />
     </>
   );
 };
