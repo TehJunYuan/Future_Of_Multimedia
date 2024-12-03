@@ -2,13 +2,12 @@
 
 import { Heading } from "@/components/heading";
 import { FormControl, FormItem, Form, FormField } from "@/components/ui/form";
-import { MessageSquare, Mic } from "lucide-react";
+import { Mic } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import { formSchema } from "./constants";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,7 +15,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from "@/components/Loader"; // Import the Loader component
 import Empty from "@/components/Empty"; // Import the Empty component
 
-const SpeechTextPage = () => {
+const STTPage = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -185,4 +184,4 @@ const SpeechTextPage = () => {
     );
 }
 
-export default SpeechTextPage;
+export default STTPage;
